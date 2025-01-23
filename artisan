@@ -1,0 +1,18 @@
+#!/usr/bin/env php //telling the compiler that we work with php
+<?php
+
+use Symfony\Component\Console\Input\ArgvInput;
+//Marks the starting time of the script. This is used to measure how long the script takes to run (for performance tracking).
+define('LARAVEL_START', microtime(true));
+
+// Register the Composer autoloader...
+//Loads all the required classes and libraries installed via Composer Without this, Laravel and its dependencies won’t work
+require __DIR__ . '/vendor/autoload.php';
+
+// Bootstrap Laravel and handle the command...
+//Loads the Laravel application, setting up the core framework and configurations.
+$status = (require_once __DIR__ . '/bootstrap/app.php')
+    // Runs the Artisan command that you specified in the terminal
+    ->handleCommand(new ArgvInput);
+
+exit($status);
